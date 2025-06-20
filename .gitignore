@@ -8,6 +8,7 @@ media
 static/
 media/
 project/local_settings.py
+mysql_206
 
 # Backup files # 
 *.bak 
