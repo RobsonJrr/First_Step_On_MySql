@@ -93,10 +93,14 @@ with connection:
     connection.commit()
 
     with connection.cursor() as cursor:
+        menor_id = int(input('Digite o menor id: '))
+        maior_id = int(input('Digite o maior id: '))
         sql = (
             f'SELECT * FROM {TABLE_NAME} '
+            'WHERE id BETWEEN %s AND %s  '
         )
-        cursor.execute(sql)
+        cursor.execute(sql, (menor_id, maior_id))
+        print(cursor.mogrify(sql, (menor_id, maior_id)))
         data5 = cursor.fetchall()
 
         for row in data5:
