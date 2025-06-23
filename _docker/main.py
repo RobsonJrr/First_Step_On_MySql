@@ -56,3 +56,38 @@ with connection:
         # print(sql, data)
         # print(result)
     connection.commit()
+
+    with connection.cursor() as cursor:
+        sql = (
+            f'INSERT INTO {TABLE_NAME} '
+            '(nome, idade)'
+            'VALUES '
+            '(%(name)s, %(age)s) '
+        )
+        data3 = (
+            {"name": "joão", "age": 33, },
+            {"name": "maria", "age": 22, },
+            {"name": "vitor", "age": 11, },
+        )
+        result = cursor.executemany(sql, data3)
+        # print(sql)
+        # print(data3)
+        # print(result)
+    connection.commit()
+
+    with connection.cursor() as cursor:
+        sql = (
+            f'INSERT INTO {TABLE_NAME} '
+            '(nome, idade)'
+            'VALUES '
+            '(%s, %s) '
+        )
+        data4 = (
+            ("alex", 43),
+            ("bob", 52),
+        )
+        result = cursor.executemany(sql, data4)
+        print(sql)
+        print(data4)
+        print(result)
+    connection.commit()
