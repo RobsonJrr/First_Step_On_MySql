@@ -109,15 +109,25 @@ with connection:
         # for row in data5:
         #     print(row)
 
+    # with connection.cursor() as cursor:
+    #     sql = (
+    #         f'DELETE FROM {TABLE_NAME} '
+    #         'WHERE id = %s'
+    #     )
+    #     cursor.execute(sql (1, ))
+    #     connection.commit()
+
+    #     cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
+
     with connection.cursor() as cursor:
         sql = (
-            f'DELETE FROM {TABLE_NAME} '
-            'WHERE id = %s'
+            f'UPDATE {TABLE_NAME} '
+            'SET nome=%s, idade=%s '
+            'WHERE id=%s'
         )
-        cursor.execute(sql)
-        connection.commit()
-
+        cursor.execute(sql, ('joaninha', 13, 4))
         cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
 
         for row in cursor.fetchall():
-            print(row)
+            print(row)    
+    connection.commit()
