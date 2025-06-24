@@ -4,6 +4,7 @@ import dotenv
 import os
 
 TABLE_NAME = 'customers'
+CURRENT_CURSOR = pymysql.cursors.DictCursor
 
 dotenv.load_dotenv()
 
@@ -13,7 +14,7 @@ connection = pymysql.connect(
     password=os.environ['MYSQL_PASSWORD'],
     database=os.environ['MYSQL_DATABASE'],
     charset='utf8mb4',
-    cursorclass=pymysql.cursors.DictCursor,
+    cursorclass=CURRENT_CURSOR,
 )
 
 with connection:
@@ -130,10 +131,12 @@ with connection:
         cursor.execute(sql, ('joaninha', 13, 4))
         cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
 
+        # data6 = cursor.fetchall()
+
         # for row in cursor.fetchall():
         #     _id, name, age = row
         #     print(_id, name, age)
-
         for row in cursor.fetchall():
-            print(row)    
+            print(row)  
+             
     connection.commit()
